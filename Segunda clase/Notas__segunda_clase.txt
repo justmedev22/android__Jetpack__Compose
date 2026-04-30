@@ -1,0 +1,43 @@
+// arreglos
+fun arreglosKotlin(){
+    val arrayNumeros: IntArray = intArrayOf(12,13,3,4,21)
+	val paises = ArrayList<String>()
+    paises.add("Peru")
+    paises.add("Brasil")
+}
+
+// val son consideradas constantes
+// var son consideradas variables
+fun bucleFor(){
+    val notas = intArrayOf(13, 20, 4, 6, 8)
+    for(nota: Int in notas){
+        println/(nota.toString())
+    } // toma dato por valor e indice
+    for((indice, valor) in notas.withIndex()){
+        println("Nota $indice es igual $valor")
+    } // se puede recorrer intervalos de nros
+    for(numero in 5 .. 15){
+        println("Numero $numero")
+    }
+}
+
+// bucles como el doWhile
+fun doWhile(){
+    var contador = 15
+    while (contador > 1) {
+        
+    } do{
+       // deja pasar y luego consulta 
+    }while (contador > 1)    
+}
+
+// ejemplos de funciones
+fun ejemplosLambda() {
+    val alumno = arrayListOf(9. 10. 30. 40. 1)
+    n -> if(n % 2 == 0){
+        return true
+    } else {
+        return false
+    }
+}
+
