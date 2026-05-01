@@ -19,7 +19,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppinitcomposeTheme {
-                ejemploRow()
+               // ejemploRow()
+               // MessageCard("Android")
+                prueba()
             }
         }
     }

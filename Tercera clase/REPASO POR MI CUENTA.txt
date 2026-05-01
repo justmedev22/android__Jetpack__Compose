@@ -1,0 +1,44 @@
+repasa nuevamente el column y row de esto
+PREGUNTAS: 
+como se ordena las apps se puede iniciar por column o row sin problema=
+
+se maneja por comnponentes 
+
+osea arriba puede ser un grupo de btotones en row
+luego abajo una lista de contactos seria column
+y finalmente un row con opciones
+para mantener el orden seria un column el padre no?
+>
+> entonces a cada componente se le puede poner un padding por espacio
+
+
+te puedo pasar ideas y tu lo puedes convertir a codigo de android para ver la similitud y aprender un poco mas
+
+
+explicame sobre el maxsize , maxWidth , maxHeight , diferencias y usos 
+
+
+todo esto del compose se maneja en diferentes archivos o todo en uno solo
+===============================
+PARTES BASES DEL CODIGO 
+
+🔹 En Column (tu caso original)
+Column(
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+)
+🔹 En Row (equivalente correcto)
+Row(
+    horizontalArrangement = Arrangement.Center,
+    verticalAlignment = Alignment.CenterVertically
+)
+
+
+REFERENCIAS
+https://chatgpt.com/c/69f509bf-fb3c-83e9-935f-43601f12f004
+
+https://developer.android.com/develop/ui/compose/tutorial?hl=es-419
+
+https://developer.android.com/compose
+ 
+

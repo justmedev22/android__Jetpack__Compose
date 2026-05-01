@@ -1,0 +1,82 @@
+🔹 En Column (tu caso original)
+Column(
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+)
+🔹 En Row (equivalente correcto)
+Row(
+    horizontalArrangement = Arrangement.Center,
+    verticalAlignment = Alignment.CenterVertically
+)
+
+
+prueba1
+
+@Composable
+fun prueba() {
+    Column (
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
+            .padding(top = 15.dp)
+
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+                //.padding(top = 20.dp)
+        )
+        {
+            Text(
+                text = "Header",
+                modifier = Modifier
+                    .padding(20.dp)
+            )
+        }
+
+        Column (
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+        ) {
+            Text(
+                text = "Texto centrado"
+               )
+            Text(
+                text = "(Hola mundo)"
+            )
+        }
+        Row (
+            horizontalArrangement =  Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+                .padding(bottom = 40.dp)
+        ) {
+            Text(
+                text = "btn1"
+            )
+            Text(
+                text = "btn2"
+            )
+        }
+    }
+
+
+// ========================
+RETO
+
+SIGUIENTE PASO (si quieres subir nivel)
+
+Te propongo otro ejercicio más real:
+
+👉 Hacer un layout tipo WhatsApp
+
+Imagen circular
+Nombre + mensaje
+Hora a la derecha
+Clickable
+
+Eso ya te lleva a nivel intermedio real.
+
+¿Le damos a ese?
