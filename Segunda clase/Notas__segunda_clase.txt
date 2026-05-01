@@ -41,3 +41,65 @@ fun ejemplosLambda() {
     }
 }
 
+// parte 2da clase
+// funciones de multiplicacion
+val miFuncionMultiplica = fun (n1: Int, n2:Int): Int{
+    return n1 * n2
+}
+
+operaciones(10, 4 , miFuncionMultiplica)
+operaciones(12, 8, {x, y -> x +y})
+
+// funciones de lambda en una sola linea
+private fun operaciones(x: Int, Z: Int, operacionesLambda:(Int,Int) -> Int):Int{
+    return operacionLambda(x, z)
+}
+
+
+// ----------------
+// herencia 
+class Animal {
+fun emitirSonido() {
+}
+fun trasladarse(){
+}
+
+// lo llamas como
+interface IAnimal {
+fun emitirSonido()
+fun trasladarse()
+fun cazar()
+}
+
+
+// parte de herencia
+class Animal : IAnimal {
+	oveeride fun emitirSonido() {
+		TODO( "Not yet implemented")
+	}
+	oveeride fun trasladarse() {
+		TODO( "Not yet implemented")
+	}
+	oveeride fun cazar() {
+		TODO( "Not yet implemented")
+	}
+}
+
+
+// para qye ka gerebcua aokuqye sobre la clase hija
+class Pulpo : Animal() {
+	override fun emiturSonido(){
+		super.emitirSonido()
+	}
+
+
+
+
+// parte de los grupos 23:57 30/4/2026
+50% -- > 1:30:50 
+
+// Data class
+// sirven para crear clases con sus respectivos atributos
+
+1:40 me quede
+
