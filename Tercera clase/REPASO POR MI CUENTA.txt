@@ -1,3 +1,7 @@
+
+
+min 50 avwance 3era clase
+
 repasa nuevamente el column y row de esto
 PREGUNTAS: 
 como se ordena las apps se puede iniciar por column o row sin problema=
@@ -41,4 +45,5 @@ https://developer.android.com/develop/ui/compose/tutorial?hl=es-419
 
 https://developer.android.com/compose
  
+
 
