@@ -19,7 +19,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppbasiccomponentsTheme {
-                MiColumnPrueba()
+                //MiColumnPrueba()
+                PromedioScreen()
             }
         }
     }

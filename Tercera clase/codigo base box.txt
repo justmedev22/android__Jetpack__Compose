@@ -1,0 +1,37 @@
+primer parte del codigo
+
+
+@Composable
+fun EjemploConstraint() {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxSize()
+        // es como organizar elementos pero con ids para nombrar
+
+    ) {
+        val (boxBlue, boxRed) = createRefs()
+        // val guiaLineaArriba = createGuidelineFromTop(0.1f)
+        Box(
+            modifier = Modifier
+                .size(125.dp)
+                .background(Color.Blue)
+                .constrainAs(boxBlue) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom)
+                })
+        Box(
+            modifier = Modifier
+                .size(125.dp)
+                .background(Color.Red)
+                .constrainAs(boxRed) {
+                    top.linkTo(boxBlue.bottom)
+                    start.linkTo(boxBlue.end)
+                })
+    }
+}
+
+
+sobre introduccion al box 
+
+
