@@ -1,0 +1,6 @@
+esto es una dependencia 
+   
+ implementation("androidx.navigation:navigation-compose:2.7.7")
+
+se debe colocar en la carpeta gradle en la parte de modules
+
