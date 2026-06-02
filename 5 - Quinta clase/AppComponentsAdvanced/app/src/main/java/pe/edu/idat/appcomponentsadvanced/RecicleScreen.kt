@@ -85,8 +85,8 @@ fun listarMascotas(): List<Mascota> {
 
 
 @Composable
-fun EjemploSimpleRecyclerView() {
-    val listadoMascotas = listOf("Hanna","Wolverine","Simba","Zeus")
+fun EjemploSimpleRecyclerView() {   // primera forma por la lista , 2da manualmente (de forma limitada) // usando la lista
+    val listadoMascotas = listOf("Hanna","Wolverine","Simba","Zeus")  
     LazyColumn { // 3 formas de mostrar en pantalla los datos
         item { Text(text = "Elemento 1") }
         item { Text(text = "Elemento 2") }
