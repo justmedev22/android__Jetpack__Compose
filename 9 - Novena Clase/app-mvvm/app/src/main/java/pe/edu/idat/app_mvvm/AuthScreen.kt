@@ -3,7 +3,6 @@ package pe.edu.idat.app_mvvm
 import android.R.attr.password
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,26 +14,18 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import pe.idat.appmvvm.auth.AuthViewModel
 
@@ -51,14 +42,6 @@ fun authScreen(authViewModel: AuthViewModel) {
     }
 }
 
-@SuppressLint("ContextCastToActivity")
-@Composable
-fun cabecera(modifier: Modifier) {
-    val activity = LocalContext.current as Activity
-    Icon(imageVector = Icons.Default.Close
-        , contentDescription = "Cerrar",
-        modifier = modifier.clickable { activity.finish() })
-}
 
 
 @Composable
@@ -91,10 +74,6 @@ fun txtusuario(usuario: String, onTextChanged: (String) -> Unit) {
 
 @Composable
 fun txtpassword(password: String, onTextChanged: (String) -> Unit) {
-
-    var visible by rememberSaveable {
-        mutableStateOf(false)
-    }
     OutlinedTextField(
         value = password,
         onValueChange = { onTextChanged(it) },
@@ -102,33 +81,26 @@ fun txtpassword(password: String, onTextChanged: (String) -> Unit) {
         label = { Text(text = "Contraseña") },
         maxLines = 1,
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        trailingIcon = {
-            val imagen = if (visible){
-            Icons.Filled.VisibilityOff
-        } else
-        {
-          Icons.Filled.Visibility
-        }
-            IconButton(onClick = { visible = !visible }) {
-                Icon(imageVector = imagen, contentDescription = "" )
-            }
-        },
-        visualTransformation = if ( visible ) {
-            VisualTransformation.None
-        } else PasswordVisualTransformation()
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
     )
 }
 
+@SuppressLint("ContextCastToActivity")
+@Composable
+fun cabecera(modifier: Modifier) {
+    val activity = LocalContext.current as Activity
+    Icon(imageVector = Icons.Default.Close
+        , contentDescription = "Cerrar",
+        modifier = modifier.clickable { activity.finish() })
+}
 
 
+/*
 @Composable  // el profe explica pero xd lo intente
-fun authButton( authViewModel: AuthViewModel ){
-    Button( onClick = {
-        Log.i("LOGINMVVM" ,  authViewModel.autentificarUsuario().toString())
-    }) {
+fun footer(modifier: Modifier, authViewModel: AuthViewModel){
+    Button( onClick = authViewModel.autentificarUsuario() ) {
         Text(text = "Validar")
     }
 }
-
+*/
 
