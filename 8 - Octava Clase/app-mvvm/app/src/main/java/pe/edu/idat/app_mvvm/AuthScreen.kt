@@ -3,6 +3,7 @@ package pe.edu.idat.app_mvvm
 import android.R.attr.password
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,7 +55,7 @@ fun cuerpo(modifier: Modifier, authViewModel: AuthViewModel) {
         txtusuario(usuario) { authViewModel.onLoginTextChanged( it, password ) }
         Spacer(modifier = Modifier.size(15.dp))
         txtpassword(password) { authViewModel.onLoginTextChanged( usuario, it ) }
-
+        authbutton(authViewModel)
     }
 }
 
@@ -95,12 +96,13 @@ fun cabecera(modifier: Modifier) {
 }
 
 
-/*
 @Composable  // el profe explica pero xd lo intente
-fun footer(modifier: Modifier, authViewModel: AuthViewModel){
-    Button( onClick = authViewModel.autentificarUsuario() ) {
+fun authbutton( authViewModel: AuthViewModel){
+    Button( onClick = {
+        Log.i("LOGINMVVM", authViewModel.autentificarUsuario().toString())
+        }) {
         Text(text = "Validar")
     }
 }
-*/
+
 
