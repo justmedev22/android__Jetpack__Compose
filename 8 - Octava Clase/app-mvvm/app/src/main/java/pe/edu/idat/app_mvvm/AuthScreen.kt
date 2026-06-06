@@ -1,9 +1,7 @@
 package pe.edu.idat.app_mvvm
 
-import android.R.attr.password
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,49 +17,100 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import kotlinx.coroutines.launch
+import pe.edu.idat.app_mvvm.model.Routes
 import pe.idat.appmvvm.auth.AuthViewModel
 
 @Composable
-fun authScreen(authViewModel: AuthViewModel) {
-    Scaffold { paddiingInit ->
-        Box( modifier = Modifier
-            .padding(paddiingInit)
-            .fillMaxSize()) {
-            cabecera(modifier = Modifier.align(Alignment.TopEnd) )
-            cuerpo(modifier = Modifier.align(Alignment.Center), authViewModel = authViewModel )
+fun authScreen(
+    authViewModel: AuthViewModel,
+    navController: NavController
+) {
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
 
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        }
+    ) { paddingInit ->
+
+        Box(
+            modifier = Modifier
+                .padding(paddingInit)
+                .fillMaxSize()
+        ) {
+            cabecera(
+                modifier = Modifier.align(Alignment.TopEnd)
+            )
+
+            cuerpo(
+                modifier = Modifier.align(Alignment.Center),
+                authViewModel = authViewModel,
+                state = snackbarHostState,
+                navController = navController
+            )
         }
     }
 }
 
-
-
 @Composable
-fun cuerpo(modifier: Modifier, authViewModel: AuthViewModel) {
+fun cuerpo(
+    modifier: Modifier,
+    authViewModel: AuthViewModel,
+    state: SnackbarHostState,
+    navController: NavController
+) {
     val usuario: String by authViewModel.usuario.observeAsState(initial = "")
     val password: String by authViewModel.password.observeAsState(initial = "")
 
-    Column (modifier = modifier.padding(start = 10.dp, end = 10.dp)) {
+    Column(
+        modifier = modifier.padding(start = 10.dp, end = 10.dp)
+    ) {
         Spacer(modifier = Modifier.size(15.dp))
-        txtusuario(usuario) { authViewModel.onLoginTextChanged( it, password ) }
+
+        txtusuario(usuario) {
+            authViewModel.onLoginTextChanged(it, password)
+        }
+
         Spacer(modifier = Modifier.size(15.dp))
-        txtpassword(password) { authViewModel.onLoginTextChanged( usuario, it ) }
-        authbutton(authViewModel)
+
+        txtpassword(password) {
+            authViewModel.onLoginTextChanged(usuario, it)
+        }
+
+        Spacer(modifier = Modifier.size(15.dp))
+
+        authbutton(
+            authViewModel = authViewModel,
+            state = state,
+            navController = navController
+        )
     }
 }
 
-
 @Composable
-fun txtusuario(usuario: String, onTextChanged: (String) -> Unit) {
+fun txtusuario(
+    usuario: String,
+    onTextChanged: (String) -> Unit
+) {
     OutlinedTextField(
         value = usuario,
         onValueChange = { onTextChanged(it) },
@@ -72,9 +121,11 @@ fun txtusuario(usuario: String, onTextChanged: (String) -> Unit) {
     )
 }
 
-
 @Composable
-fun txtpassword(password: String, onTextChanged: (String) -> Unit) {
+fun txtpassword(
+    password: String,
+    onTextChanged: (String) -> Unit
+) {
     OutlinedTextField(
         value = password,
         onValueChange = { onTextChanged(it) },
@@ -82,7 +133,10 @@ fun txtpassword(password: String, onTextChanged: (String) -> Unit) {
         label = { Text(text = "Contraseña") },
         maxLines = 1,
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password
+        ),
+        visualTransformation = PasswordVisualTransformation()
     )
 }
 
@@ -90,19 +144,40 @@ fun txtpassword(password: String, onTextChanged: (String) -> Unit) {
 @Composable
 fun cabecera(modifier: Modifier) {
     val activity = LocalContext.current as Activity
-    Icon(imageVector = Icons.Default.Close
-        , contentDescription = "Cerrar",
-        modifier = modifier.clickable { activity.finish() })
+
+    Icon(
+        imageVector = Icons.Default.Close,
+        contentDescription = "Cerrar",
+        modifier = modifier.clickable {
+            activity.finish()
+        }
+    )
 }
 
+@Composable
+fun authbutton(
+    authViewModel: AuthViewModel,
+    state: SnackbarHostState,
+    navController: NavController
+) {
+    val scope = rememberCoroutineScope()
 
-@Composable  // el profe explica pero xd lo intente
-fun authbutton( authViewModel: AuthViewModel){
-    Button( onClick = {
-        Log.i("LOGINMVVM", authViewModel.autentificarUsuario().toString())
-        }) {
+    Button(
+        onClick = {
+            if (authViewModel.autentificarUsuario()) {
+                navController.navigate(Routes.homeScreen.paramHome(2))
+            } else {
+                scope.launch {
+                    state.showSnackbar(
+                        message = "Usuario y/o password incorrectos",
+                        actionLabel = "OK",
+                        duration = SnackbarDuration.Short
+                    )
+                }
+            }
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
         Text(text = "Validar")
     }
 }
-
-
