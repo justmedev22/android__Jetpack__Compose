@@ -1,0 +1,21 @@
+package pe.edu.idat.appmvvmapirest.posts.data.network.service
+
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
+import pe.edu.idat.appmvvmapirest.posts.data.network.response.PostResponse
+import pe.edu.idat.appmvvmapirest.posts.data.network.retrofitclient.PostClient
+import javax.inject.Inject
+
+class PostService  @Inject constructor(private val postClient: PostClient)  {
+
+
+    suspend fun getPosts(): List<PostResponse> {
+        return withContext(Dispatchers.IO) {
+            val response = postClient.getPosts()
+            response.body()!!
+        }
+
+    }
+
+}
